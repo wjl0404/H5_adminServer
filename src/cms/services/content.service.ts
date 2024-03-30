@@ -3,7 +3,7 @@ import { In, Like, Raw, MongoRepository, ObjectID } from 'typeorm';
 import { Content } from '../entities/content.mongo.entity';
 import { PaginationParamsDto } from '../../shared/dtos/pagination-params.dto';
 import { CreateContentDto, UpdateContentDto } from '../dtos/content.dto';
-import * as puppeteer from 'puppeteer';
+// import * as puppeteer from 'puppeteer';
 import { join } from 'path';
 import { ensureDir, outputFile } from 'fs-extra';
 
@@ -114,55 +114,55 @@ export class ContentService {
     );
   }
 
-  async takeScreenshot(id) {
-    id = 15;
-    const url = `http://builder.codebus.tech/?id=${id}`;
-    // const host = 'http://template.codebus.tech';
-    const host = 'http://localhost:3000';
-    const prefix = `static/upload`;
-    const imgPath = join(__dirname, '../../../..', prefix);
-    const thumbnailFilename = `thumb_header_${id}.png`;
-    const thumbnailFullFilename = `thumb_full_${id}.png`;
+  // async takeScreenshot(id) {
+  //   id = 15;
+  //   const url = `http://builder.codebus.tech/?id=${id}`;
+  //   // const host = 'http://template.codebus.tech';
+  //   const host = 'http://localhost:3000';
+  //   const prefix = `static/upload`;
+  //   const imgPath = join(__dirname, '../../../..', prefix);
+  //   const thumbnailFilename = `thumb_header_${id}.png`;
+  //   const thumbnailFullFilename = `thumb_full_${id}.png`;
 
-    await this.runPuppteer(url, {
-      thumbnailFilename: join(imgPath, thumbnailFilename),
-      thumbnailFullFilename: join(imgPath, thumbnailFullFilename),
-    });
+  //   await this.runPuppteer(url, {
+  //     thumbnailFilename: join(imgPath, thumbnailFilename),
+  //     thumbnailFullFilename: join(imgPath, thumbnailFullFilename),
+  //   });
 
-    return {
-      header: host + prefix + thumbnailFilename,
-      full: host + prefix + thumbnailFullFilename,
-    };
-  }
+  //   return {
+  //     header: host + prefix + thumbnailFilename,
+  //     full: host + prefix + thumbnailFullFilename,
+  //   };
+  // }
 
-  async runPuppteer(url, { thumbnailFilename, thumbnailFullFilename }) {
-    // 打开浏览器
-    const browser = await puppeteer.launch({
-      args: ['--no-sandbox', '--lang=zh-CN'],
-      executablePath: `chrome-win\\chrome.exe`,
-      headless: true,
-    });
+  // async runPuppteer(url, { thumbnailFilename, thumbnailFullFilename }) {
+  //   // 打开浏览器
+  //   const browser = await puppeteer.launch({
+  //     args: ['--no-sandbox', '--lang=zh-CN'],
+  //     executablePath: `chrome-win\\chrome.exe`,
+  //     headless: true,
+  //   });
 
-    const page = await browser.newPage();
+  //   const page = await browser.newPage();
 
-    await page.setViewport({ width: 750, height: 800 });
+  //   await page.setViewport({ width: 750, height: 800 });
 
-    await page.goto(url, {
-      waitUntil: 'networkidle0',
-    });
+  //   await page.goto(url, {
+  //     waitUntil: 'networkidle0',
+  //   });
 
-    // 截图
-    await page.screenshot({
-      path: thumbnailFilename,
-    });
+  //   // 截图
+  //   await page.screenshot({
+  //     path: thumbnailFilename,
+  //   });
 
-    await page.screenshot({
-      fullPage: true,
-      path: thumbnailFullFilename,
-    });
+  //   await page.screenshot({
+  //     fullPage: true,
+  //     path: thumbnailFullFilename,
+  //   });
 
-    console.log('截图 OK...');
+  //   console.log('截图 OK...');
 
-    await browser.close();
-  }
+  //   await browser.close();
+  // }
 }

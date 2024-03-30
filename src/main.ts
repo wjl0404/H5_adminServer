@@ -6,7 +6,11 @@ import { RemoveSensitiveUserInfoInterceptor } from './shared/interceptors/remove
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.enableCors();
+  app.enableCors({
+    origin: '*',
+    methods: 'GET, PUT, POST, DELETE',
+    allowedHeaders: 'Content-Type, Authorization',
+  });
   // 添加数据校验
   app.useGlobalPipes(new ValidationPipe());
   // 创建文档
