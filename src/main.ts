@@ -17,6 +17,6 @@ async function bootstrap() {
   generateDocument(app);
   app.useGlobalInterceptors(new RemoveSensitiveUserInfoInterceptor());
 
-  await app.listen(3000);
+  await app.listen(4000);
 }
 bootstrap();
